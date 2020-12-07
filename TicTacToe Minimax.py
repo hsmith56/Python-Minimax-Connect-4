@@ -89,7 +89,7 @@ class Piece:
 
 
 def minimax(board, depth, maximizingPlayer):
-	if board.isGameOver():
+	if board.isGameOver() or depth == 0:
 		if board.gameover:
 			if board.winner == board.p1.control:
 				return 10*depth
@@ -131,7 +131,7 @@ def aiMove(game,p1):
 
 def playerMove(game,p2):
 	playerMove = input('Where would you like to move? ').split(sep=',')
-	print(playerMove)
+	#print(playerMove)
 	playerMove = [int(playerMove[0]),int(playerMove[1])]
 	while playerMove not in game.getEmpty():
 		playerMove = input('Please enter a valid position ').split(sep=',')
@@ -150,7 +150,7 @@ def newGame():
 		p1 = Piece(P1,'AI')
 		p2 = Piece(P2,'Player')
 		game = Game(p1,p2)
-
+		game.printBoard()
 		if P1 == 0: 
 			aiMove(game, p1)
 			game.printBoard()
