@@ -25,17 +25,18 @@ class Game:
 
 	def isGameOver(self):
 		"""
-		#1 - returns true if there is a win across a row 
-		#2 - returns true if there is a win on a column
-		#5 - returns false if there is still empty spots to play
-		#6 - returns true if no spots left to play, meaning a tie
+		# 1 - returns true if there is a win across a row 
+		# 2 - returns true if there is a win on a column
+		# 3 - returns true if diagional win from bottom left to top right
+		# 4 - returns true if diagional win from top left to bottom right
+		# 5 - returns false if there is still empty spots to play
+		# 6 - returns true if no spots left to play, meaning a tie
 		"""
 		for num, row in enumerate(self.board): # 1
 			if row.count(row[0]) == 3 and row[0].control != None:
 				self.gameover = True
 				self.winner = row[0].control
 				return True
-				
 
 		for column in range(3): # 2
 			if self.board[0][column].control != None:
@@ -43,7 +44,6 @@ class Game:
 					self.gameover = True
 					self.winner = self.board[0][column].control
 					return True
-					
 
 		if self.board[2][0].control != None: # 3
 			if self.board[2][0].control == self.board[1][1].control == self.board[0][2].control:
@@ -51,26 +51,21 @@ class Game:
 				self.winner = self.board[2][0].control
 				return True
 				
-				
 		if self.board[0][0].control != None: # 4
 			if self.board[0][0] == self.board[1][1] == self.board[2][2]:
 				self.gameover = True
 				self.winner = self.board[0][0].control
 				return True
-				
 
 		for x in self.board: # 5
 			row = [l.control for l in x]
 			if None in row:
 				return
-				
-
-		
+						
 		self.winner = 'Tie'	# 6	
 		self.gameover = True
 		return True 
 		
-
 	def getEmpty(self):
 		"""
 		Returns a 2d array of all valid empty positions on a board
@@ -178,10 +173,3 @@ def newGame():
 		replay = input("Would you like to play again? [y/n] ").lower()		
 
 newGame()
-
-
-"""
-correlation - if i loginto a box and i do 10 bad things, the SOC gets 1 bad ticket for 1 bad thing
-
-
-"""
